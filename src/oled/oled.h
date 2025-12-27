@@ -1,7 +1,7 @@
 #pragma once
 
 #include <Adafruit_SSD1306.h>
-#include "../include/config.h"
+#include "config.h"
 
 extern Adafruit_SSD1306 display;
 

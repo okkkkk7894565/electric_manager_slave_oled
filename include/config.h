@@ -32,3 +32,8 @@
 #define AP_NAME         "PZEM_C3_CONFIG"
 #define PREFS_NAMESPACE "pzem_slave"
 #define MAC_KEY         "master_mac"
+
+// === ESP-NOW UNICAST TO MASTER ===
+extern uint8_t masterMac[6];  // Địa chỉ MAC của Master (ESP32 hoặc ESP8266 nhận dữ liệu)
+#define ESPNOW_SEND_INTERVAL 5000  // Gửi mỗi 5 giây
+
