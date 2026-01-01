@@ -3,6 +3,7 @@
 #include <Arduino.h>
 #include "../oled/oled.h"
 #include "../include/config.h"
+#include "esp32async/esp32async.h"
 
 // Trạng thái màn hình (enum)
 enum ScreenState {

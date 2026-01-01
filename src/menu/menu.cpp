@@ -30,7 +30,7 @@ void menuDrawMenu()
     display.setTextColor(SSD1306_WHITE);
 
     oledPrint(0, 8, currentMenu == MENU_RESET_ENERGY ? "> XOA SO DIEN" : "  XOA SO DIEN");
-    oledPrint(0, 24, currentMenu == MENU_RESET_WIFI ? "> XOA WIFI/MAC" : "  XOA WIFI/MAC");
+    oledPrint(0, 24, currentMenu == MENU_RESET_WIFI ? "> XOA MasterMac" : "  XOA MasterMac");
     oledPrint(0, 40, currentMenu == MENU_EXIT ? "> THOAT" : "  THOAT");
 
     oledDisplay();
@@ -41,8 +41,9 @@ void menuDoAction()
     oledClear();
     display.setTextSize(1);
     display.setCursor(0, 20);
-    display.println("Dang thuc hien...");
+    display.println("Handling Button ...");
     oledDisplay();
+    delay(500);
 
     if (currentMenu == MENU_RESET_ENERGY)
     {
@@ -51,22 +52,26 @@ void menuDoAction()
         oledDisplay();
         pzemResetEnergy(); // Gọi hàm reset energy của PZEM
         delay(1500);
+        oledClear();
+        screenState = SCREEN_HOME;
+        menuDrawHome();
+        return;
     }
     else if (currentMenu == MENU_RESET_WIFI)
     {
         display.setCursor(0, 35);
-        display.println("Xoa MAC Master...");
+        display.println("Delete MAC Master...");
         oledDisplay();
-        // resetMasterMAC();   // Xóa MAC master trong Preferences
-        delay(2000);
-
+        resetMasterMAC(); // Xóa MAC master trong Preferences
         oledClear();
         display.setCursor(0, 20);
-        display.println("Da xoa MAC!");
+        display.println("MAC Address Deleted");
         display.setCursor(0, 35);
-        display.println("Khoi dong lai...");
+        display.println("Restarting...");
         oledDisplay();
-        delay(2000);
+        delay(1500);
+        oledClear();
+        delay(1500);
         ESP.restart(); // Restart để mở WiFiManager config lại
     }
     else if (currentMenu == MENU_EXIT)

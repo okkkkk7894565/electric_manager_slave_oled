@@ -37,3 +37,4 @@
 extern uint8_t masterMac[6];  // Địa chỉ MAC của Master (ESP32 hoặc ESP8266 nhận dữ liệu)
 #define ESPNOW_SEND_INTERVAL 5000  // Gửi mỗi 5 giây
 
+#define SSID_CONF   "EMS_MAC_SLAVE"

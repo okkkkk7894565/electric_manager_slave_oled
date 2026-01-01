@@ -1,7 +1,7 @@
 #include "espnow.h"
 
 // Địa chỉ MAC của Master - THAY BẰNG MAC THỰC TẾ CỦA MASTER
-uint8_t masterMac[6] = {0xC8, 0xC9, 0xA3, 0x34, 0xF4, 0x40}; // ←←←← THAY Ở ĐÂY
+// uint8_t masterMac[6] = {0xE4, 0x65, 0xB8, 0x49, 0xCD, 0x88}; // ←←←← THAY Ở ĐÂY
 
 void OnDataSent(const uint8_t *mac_addr, esp_now_send_status_t status)
 {
@@ -40,7 +40,7 @@ void espnowInit()
         return;
     }
 
-    Serial.print("[ESPNOW] Ready - Gửi unicast đến Master MAC: ");
+    Serial.print("[ESPNOW] Send to Master MAC: ");
     for (int i = 0; i < 6; i++)
     {
         Serial.printf("%02X", masterMac[i]);

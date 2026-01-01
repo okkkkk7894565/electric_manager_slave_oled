@@ -3,7 +3,8 @@
 #include "oled/oled.h"
 #include "menu/menu.h"
 #include "pzem/pzem.h"
-#include "espnow/espnow.h" // ← Thêm
+#include "espnow/espnow.h"
+#include "esp32async/esp32async.h"
 
 bool lastButtonState = HIGH;
 unsigned long pressTime = 0;
@@ -22,8 +23,10 @@ void setup()
     pinMode(RELAY_PIN, OUTPUT);
     digitalWrite(RELAY_PIN, LOW);
     oledInit();
+    oledClear();
     pzemInit();
-    espnowInit(); // ← Khởi tạo ESP-NOW
+    checkmasterMacAdd();
+    espnowInit();
     menuInit();
     pzemReadAndUpdate();
     pzemDisplayHome();
@@ -67,11 +70,11 @@ void loop()
     {
         if (espnowSend(&sensorData, sizeof(sensorData)))
         {
-            Serial.println("[MAIN] ESP-NOW gửi thành công đến Master");
+            Serial.println("[MAIN] ESP-NOW Sent successfully");
         }
         else
         {
-            Serial.println("[MAIN] ESP-NOW gửi thất bại");
+            Serial.println("[MAIN] ESP-NOW] Send failed");
         }
         lastEspnowSend = millis();
     }
